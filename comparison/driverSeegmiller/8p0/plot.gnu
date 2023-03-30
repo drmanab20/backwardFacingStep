@@ -1,0 +1,10 @@
+set title "Comparison with Driver and Seegmiller, x=8"
+set xlabel "u"
+set ylabel "y"
+set xlabel font ",15"
+set ylabel font ",15"
+set key font ",12"
+set title font ",20"
+set tic font ",12"
+set key left
+plot "8p0line.xy" u 2:1 title "OF" w l,"8p0bfs-driverSeegmiller.dat" u 1:2 title "Driver-Seegmiller"

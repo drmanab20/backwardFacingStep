@@ -1,0 +1,99 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  10
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Note: this file is a Copy of $FOAM_TUTORIALS/resources/blockMesh/pitzDaily
+
+convertToMeters 1;
+
+vertices
+(
+    (0 0 0)
+    (50 0 0)
+    (50 1 0)
+    (50 3.5 0)
+    (0 3.5 0)
+    (-10 3.5 0)
+    (-10 1 0)
+    (0 1 0)
+    
+    (0 0 0.1)
+    (50 0 0.1)
+    (50 1 0.1)
+    (50 3.5 0.1)
+    (0 3.5 0.1)
+    (-10 3.5 0.1)
+    (-10 1 0.1)
+    (0 1 0.1)
+    
+);
+
+
+blocks
+(
+    hex (0 1 2 7 8 9 10 15) (500 18 1) simpleGrading (1 1 1)
+
+    hex (7 2 3 4 15 10 11 12) (500 25 1) simpleGrading (1 1 1)
+
+    hex (6 7 4 5 14 15 12 13) (100 25 1) simpleGrading (1 1 1)
+
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (6 5 13 14)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (2 3 11 10)
+            (1 2 10 9)
+        );
+    }
+    fixedWalls
+    {
+        type wall;
+        faces
+        (
+            (3 4 12 11)
+            (4 5 13 12)
+            (0 1 9 8)
+            (7 0 8 15)
+            (6 7 14 15)
+        );
+    }
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (8 9 10 15)
+            (15 10 11 12)
+            (14 15 12 13)
+            (7 2 1 0)
+            (4 3 2 7)
+            (5 4 7 6)
+        );
+    }
+);
+
+// ************************************************************************* //
